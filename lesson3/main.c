@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -6,46 +7,48 @@ int main()
     int searchedNum = 0;
     int usersNum = 0;
     int selector = 0;
+    int i = 0;
 
-    for (;;){
-        srand(time(Null));
+        for (;;){
+        srand(time(NULL));
         searchedNum = rand()% 10;
 
-
-        for (int i = 0; i < 3; i++){
-                printf("%d-try")
+            for (i = 0; i < 3; i++){
+                //printf("%d-try");
+            }
                 for (;;){
                     printf(" Enter positive value: ");
                     scanf("%d", &usersNum);
-                  if (usersNum < 0);{
+                    if (usersNum < 0){
                     printf(" Hey! It's negative num!\n");
                     continue;
                   }
+                break;
                 }
 
+                    if (usersNum == searchedNum){
+                    printf("\nYahoo! RIGHT!");
+
+        break;
+
+        if (usersNum < searchedNum){
+        printf("Bigger!");
         }
 
-        break;
-    }
 
-    if (usersNum == searchedNum){
-        printf("\nYahoo! RIGHT!");
-
-        break;
-    }
-    if (usersNum < searchedNum){
-        printf("Bigger!");
-    }
-
-
-    if (usersNum > searchedNum){
+        if (usersNum > searchedNum){
         printf("Lower");
-    }
-   printf("\nCont or exit? 1\0")
-   scanf("%d", &selector);
+        }
+        printf("\nContinue or exit? 1\0");
+        scanf("%d", &selector);
 
-   if (selector == 0){
-    retorn 0;
-   }
+        if (selector == 0){
+    return 0;
+        }
+                    }
+        }
 }
+
+ //return 0;
+
 
