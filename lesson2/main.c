@@ -13,7 +13,7 @@ int main()
     int k = 0;
     int z = 0;
     int m = 0;
-    // Вывести треугольник;
+    // Print triangle;
     for (i = 0; i < rows; i++) {
         for (j = 0; j <= i; j++) {
             printf("*");
@@ -22,7 +22,7 @@ int main()
     }
     printf("\n");
 
-    // Вывести перевернутый треугольник;
+    // Print reverse triangle;
     for (i = rows; i > 0; i--) {
         for (j = 0; j < i; j++) {
             printf("*");
@@ -31,7 +31,7 @@ int main()
     }
     printf("\n");
 
-    // Нарисовать елочку;
+    // Print tree;
     for ( i = 0; i < rows; i++) {
         for (k = 0; k < (rows - i); k++) {
             printf(" ");
