@@ -13,7 +13,7 @@ int main()
     //init unic passwords
     for (i = 1; i < 5000; ) {
         int p = rand()% 8999+1000;
-        printf("%d\n", p);
+        //printf("%d\n", p);
         for (j = 0; j < i; j++) {
             if (users [j] == p) {
                 p = 0;
@@ -32,7 +32,6 @@ int main()
     }
 
     //work with user
-
     int userID = 10000;
     int k = 0;
     i = 0;
@@ -47,8 +46,8 @@ int main()
             scanf("%d", &userPassword);
             for (i = 0; i < 5000; i++ ) {
                 if (userPassword == users[i]) {
-                    userID = i;
-                    break;
+                userID = i;
+                break;
                 }
             }
         }
@@ -75,6 +74,7 @@ int main()
 
             if (command == 3) {
                 userID = 10000;
+                k = -1;
             }
         }
 
