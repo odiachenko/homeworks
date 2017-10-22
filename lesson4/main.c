@@ -12,8 +12,8 @@ int main()
     srand(time(NULL));
     //init unic passwords
     for (i = 1; i < 5000; ) {
-        int p = rand()% 10000;
-        //printf("%d\n", p);
+        int p = rand()% 8999+1000;
+        printf("%d\n", p);
         for (j = 0; j < i; j++) {
             if (users [j] == p) {
                 p = 0;
