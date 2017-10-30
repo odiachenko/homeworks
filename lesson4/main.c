@@ -63,9 +63,9 @@ int main()
         }
 
         if (userID == ADMIN_ID) { //admin
-        const int SHOW_ALL_BALANCES = 1;
-        const int CLEAR_ALL_BALANCES = 2;
-        const int EXIT = 3;
+            const int SHOW_ALL_BALANCES = 1;
+            const int CLEAR_ALL_BALANCES = 2;
+            const int EXIT = 3;
             k = 0;
             printf("make a choice:\n show all balances - 1,\nclear all balances - 2,\nexit - 3\n");;
             printf("Your choice: ");
@@ -84,14 +84,14 @@ int main()
             if (command == EXIT) {
                 userID = NOT_EXIST;
                 k = -1;
-                }
             }
+        }
 
         if (userID != NOT_EXIST && userID != ADMIN_ID ) {
-        const int CHECK_BALANCE = 1;
-        const int ENTER_AMOUNT_COMMAND = 2;
-        const int GET_MONEY = 3;
-        const int EXIT = 4;
+            const int CHECK_BALANCE = 1;
+            const int ENTER_AMOUNT_COMMAND = 2;
+            const int GET_MONEY = 3;
+            const int EXIT = 4;
             printf("make a choice:\n check balance - 1,\nto put money - 2,\nto get money - 3,\nexit - 4\n");
             printf("Your choice: ");
             int command = 0;
