@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <cstdlib>
 
 using namespace std;
 
@@ -26,8 +27,12 @@ public:
     }
 
     void showInfo() {
-        cout << "Animal: " << name << endl;
-        cout << "Kind: " << kind << "; Age: " << age << "; Health: " << health << "; Paws: " << paws << endl;
+        string showWord = "YES";
+        if (!isShow) {
+            showWord = "NO";
+        }
+        cout << "Animal: " << name;
+        cout << " Kind: " << kind << "; Age: " << age << "; Health: " << health << "; Paws: " << paws << "; isShow: " << showWord << endl;
     }
 };
 
@@ -72,30 +77,71 @@ public:
         animalsCount--;
     };
 
+    void deleteAnimal(int myAnimalNumber){
+        int i = 0;
+        int counter = 0;
+        for (i = 0; i < MAX_ANIMALS; i++) {
+            Animal* tmp = animalsList[i];
+            if (tmp) {
+                counter++;
+                if (counter == myAnimalNumber) {
+                    deleteAnimal(tmp);
+                }
+            }
+        }
+    };
+
     void showPopulation(){
         int i = 0;
         for (i = 0; i < MAX_ANIMALS; i++) {
             if (animalsList[i]) {
-                //cout << "SUCCESS:showPopulation " << endl;
                 Animal* tmp = animalsList[i];
-                if (tmp->isShow) {
+                //if (tmp->isShow) {
+                    tmp->showInfo();
+                //}
+            }
+        }
+    };
+
+    void showAboutInfo(int numberOfAnimal) {
+        int i = 0;
+        int counter = 0;
+        for (i = 0; i < MAX_ANIMALS; i++) {
+            Animal* tmp = animalsList[i];
+            if (tmp) {
+                counter++;
+                if (counter == numberOfAnimal) {
                     tmp->showInfo();
                 }
             }
         }
     };
 
-    void showAboutInfo(Animal myAnimal){
-        myAnimal.showInfo();
+    Animal* getAnimalByNumber(int numberOfAnimal) {
+        int i = 0;
+        int counter = 0;
+        Animal* tmp = animalsList[0];
+        for (i = 0; i < MAX_ANIMALS; i++) {
+            Animal* tmp = animalsList[i];
+            if (tmp) {
+                counter++;
+                if (counter == numberOfAnimal) {
+                    return tmp;
+                }
+            }
+        }
+        return tmp;
     };
 
-    void editAnimalInfo(Animal myAnimal){
+
+
+    void editAnimalInfo(Animal myAnimal) {
 
     };
 };
 
-int main()
-{
+int main() {
+
     Zoo* myZoo = new Zoo();
 
     Animal* cat = new Animal();
@@ -120,33 +166,158 @@ int main()
     fish->name = "Aquarelle";
     fish->paws = 0;
 
-    myZoo->addNewAnimal(cat);
-    myZoo->addNewAnimal(dog);
-    myZoo->addNewAnimal(fish);
-    cout << "Show all: " << endl;
-    myZoo->showPopulation();
-    cout << "Deleted dog " << endl;
-    myZoo->deleteAnimal(dog);
-    cout << "Show all: " << endl;
-    myZoo->showPopulation();
-
     Animal* horse = new Animal();
     horse->age = 10;
     horse->health = 100;
     horse->kind = "Horse";
     horse->name = "Nick";
     horse->paws = 4;
-    cout << "Added horse " << endl;
+
+    myZoo->addNewAnimal(cat);
+    myZoo->addNewAnimal(dog);
+    myZoo->addNewAnimal(fish);
     myZoo->addNewAnimal(horse);
 
-    cout << "Show all: " << endl;
-    myZoo->showPopulation();
+    for (;;) {
+        cout << "Make a choise: " << endl;
+        cout << "1 - add new animal;" << endl;
+        cout << "2 - delete animal;" << endl;
+        cout << "3 - show population;" << endl;
+        cout << "4 - show about info;" << endl;
+        cout << "5 - edit animal info" << endl;
+        cout << "0 - Exit;" << endl;
+        int choise = 0;
+        cin>>choise;
 
-//    cout << "Enter string: " << endl;
-//    int z = 0;
-//    string k;
-//    cin>>k;
-//    cout << "Entered value - " << k << endl;
+        switch (choise) {
+            case 1: //add new animal
+            {
+                Animal *newAnimal = new Animal();
+                int age = 0;
+                int health = 100;
+                int paws = 4;
+                bool isShow = true;
+                string kind = "";
+                string name = "";
+                cout << "Enter a name: ";
+                cin >> name;
+                //cout << endl;
+                cout << "Enter a kind: ";
+                cin >> kind;
+                //cout << endl;
+                cout << "Enter an age: ";
+                cin >> age;
+                //cout << endl;
+                cout << "Enter a health: ";
+                cin >> health;
+                //cout << endl;
+                cout << "Enter number of paws: ";
+                cin >> paws;
+                //cout << endl;
+                cout << "Is animal needed to show? 0-no; 1-yes ";
+                cin >> isShow;
+                //cout << endl;
+                newAnimal->age = age;
+                newAnimal->health = health;
+                newAnimal->kind = kind;
+                newAnimal->name = name;
+                newAnimal->paws = paws;
+                newAnimal->isShow = isShow;
+
+                myZoo->addNewAnimal(newAnimal);
+
+                break;
+            }
+            case 2: //delete animal
+            {
+                cout << "There are " << myZoo->animalsCount << " animals in the ZOO" << endl;
+                int number = 0;
+                cout << "Enter a number to delete :";
+                cin >> number;
+
+                if (number < 1 || number > myZoo->animalsCount) {
+                    cout << "wrong number" << endl;
+                    break;
+                }
+
+                myZoo->deleteAnimal(number);
+
+                break;
+            }
+            case 3://show population
+            {
+                myZoo->showPopulation();
+                break;
+            }
+            case 4://show about info
+            {
+                cout << "There are " << myZoo->animalsCount << " animals in the ZOO" << endl;
+                int number = 0;
+                cout << "Enter a number to show info :";
+                cin >> number;
+
+                if (number < 1 || number > myZoo->animalsCount) {
+                    cout << "wrong number" << endl;
+                    break;
+                }
+
+                myZoo->showAboutInfo(number);
+
+                break;
+            }
+            case 5://edit animal info
+            {
+                cout << "There are " << myZoo->animalsCount << " animals in the ZOO" << endl;
+                int number = 0;
+                cout << "Enter a number to edit info :";
+                cin >> number;
+
+                if (number < 1 || number > myZoo->animalsCount) {
+                    cout << "wrong number" << endl;
+                    break;
+                }
+
+                Animal *editAnimal = myZoo->getAnimalByNumber(number);
+                int age = 0;
+                int health = 100;
+                int paws = 4;
+                bool isShow = true;
+                string kind = "";
+                string name = "";
+
+                cout << "Enter new name: ";
+                cin >> name;
+                //cout << endl;
+                cout << "Enter new kind: ";
+                cin >> kind;
+                //cout << endl;
+                cout << "Enter new age: ";
+                cin >> age;
+                //cout << endl;
+                cout << "Enter new health: ";
+                cin >> health;
+                //cout << endl;
+                cout << "Enter new number of paws: ";
+                cin >> paws;
+                //cout << endl;
+                cout << "Is animal needed to show? 0-no; 1-yes ";
+                cin >> isShow;
+                //cout << endl;
+                editAnimal->age = age;
+                editAnimal->health = health;
+                editAnimal->kind = kind;
+                editAnimal->name = name;
+                editAnimal->paws = paws;
+                editAnimal->isShow = isShow;
+
+                break;
+            }
+            default: {
+                exit(0);
+                break;
+            }
+        }
+    }
 
     return 0;
 }
