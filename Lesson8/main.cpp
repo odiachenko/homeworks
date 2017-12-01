@@ -28,7 +28,6 @@ ArrayList::~ArrayList() {
     delete[] array;
 }
 
-
 void ArrayList::print() {
     for (int i = 0; i < currentSize; i++){
         cout << array[i] << endl;
@@ -79,6 +78,9 @@ void ArrayList::remove(int index) {
     }
     int i = 0;
     for (i = index; i < currentSize; i++) {
+        if (i == currentSize - 1) {
+            break;
+        }
         array[i] = array[i+1];
     }
     currentSize--;
@@ -98,11 +100,10 @@ int main()
     list->add(8);
     list->add(9);
     list->add(10);
-    list->add(11);
     list->print();
-    list->add(777, 0);
-    list->remove(5);
-    list->add(99);
+    list->remove(9);
+    list->print();
+    list->add(10);
     list->print();
     cout << "Element on index 3 is " << list->get(3) << endl;
     return 0;
